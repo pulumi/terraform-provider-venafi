@@ -11,6 +11,11 @@ description: |-
 Provides access to TLS key and certificate data enrolled using Venafi. This can be used to define a
 certificate.
 
+The `venafi_certificate` resource handles certificate renewals as long as a
+`pulumi up` is run within the `expiration_window` period. Keep in mind that the
+`expiration_window` in the provider configuration needs to align with the renewal
+window of the issuing CA to achieve the desired result.
+
 ## Example Usage
 
 ```hcl
@@ -36,14 +41,14 @@ The following arguments are supported:
 
 * `common_name` - (Required, string) The common name of the certificate.
 
-* `algorithm` - (Optional, string) Key encryption algorithm, either RSA or ECDSA.
-  Defaults to "RSA".
+* `algorithm` - (Optional, string) Key encryption algorithm, either `RSA` or `ECDSA`.
+  Defaults to `RSA`.
 
 * `rsa_bits` - (Optional, integer) Number of bits to use when generating an RSA key.
-  Applies when algorithm=RSA.  Defaults to 2048.
+  Applies when `algorithm=RSA`.  Defaults to `2048`.
 
 * `ecsa_curve` - (Optional, string) Elliptic curve to use when generating an ECDSA
-  key pair.  Applies when algorithm=ECDSA.  Defaults to "P521".
+  key pair.  Applies when `algorithm=ECDSA`.  Defaults to `P521`.
 
 * `san_dns` - (Optional, set of strings) List of DNS names to use as alternative
   subjects of the certificate.
@@ -73,12 +78,3 @@ The following attributes are exported:
 * `certificate` - The X509 certificate in PEM format.
 
 * `pkcs12` - A base64-encoded PKCS#12 keystore secured by the `key_password`.
-  Useful when working with resources like 
-  [azurerm_key_vault_certificate](https://www.terraform.io/docs/providers/azurerm/r/key_vault_certificate.html).
-
-## Certificate Renewal
-
-The `venafi_certificate` resource handles certificate renewals as long as a
-`terraform apply` is done within the `expiration_window` period. Keep in mind that the
-`expiration_window` in the Terraform configuration needs to align with the renewal
-window of the issuing CA to achieve the desired result.
