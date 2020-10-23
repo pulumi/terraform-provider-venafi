@@ -2,10 +2,11 @@
 [![MPL 2.0 License](https://img.shields.io/badge/License-MPL%202.0-blue.svg)](https://opensource.org/licenses/MPL-2.0)
 ![Community Supported](https://img.shields.io/badge/Support%20Level-Community-brightgreen)
 ![Compatible with TPP 17.3+ & Cloud](https://img.shields.io/badge/Compatibility-TPP%2017.3+%20%26%20Cloud-f9a90c)  
-_This open source project is community-supported. To report a problem or share an idea, use the
-**[Issues](../../issues)** tab; and if you have a suggestion for fixing the issue, please include those details, too.
-In addition, use the **[Pull requests](../../pulls)** tab to contribute actual bug fixes or proposed enhancements.
-We welcome and appreciate all contributions._
+_**This open source project is community-supported.** To report a problem or share an idea, use
+**[Issues](../../issues)**; and if you have a suggestion for fixing the issue, please include those details, too.
+In addition, use **[Pull Requests](../../pulls)** to contribute actual bug fixes or proposed enhancements.
+We welcome and appreciate all contributions. Got questions or want to discuss something with our team?
+**[Join us on Slack](https://join.slack.com/t/venafi-integrations/shared_invite/zt-i8fwc379-kDJlmzU8OiIQOJFSwiA~dg)**!_
 
 # Venafi Provider for HashiCorp Terraform
 
@@ -186,6 +187,8 @@ using the
    | `ecdsa_curve`       | [String](https://www.terraform.io/docs/extend/schemas/schema-types.html#typestring) | ECDSA curve to use when generating a key pair (i.e. P256, P384, P521). Applies when `algorithm`=ECDSA | P521   |
    | `key_password`      | [String](https://www.terraform.io/docs/extend/schemas/schema-types.html#typestring) | Private key password                                                              | `none` |
    | `custom_fields`     | [Map](https://www.terraform.io/docs/extend/schemas/schema-types.html#typemap) | Collection of key-value pairs where the key is the name of the Custom Field in Trust Protection Platform.  For list type Custom Fields, use the \| character to delimit mulitple values.<br/>Example: `custom_fields = { "Number List" = "2\|4\|6" }` | `none` |
+   | `valid_days` | [Integer](https://www.terraform.io/docs/extend/schemas/schema-types.html#typeint) | Desired number of days for which the new certificate will be valid | `none` |
+   | `issuer_hint` | [String](https://www.terraform.io/docs/extend/schemas/schema-types.html#typestring) | Used with `valid_days` to indicate the target issuer when using Trust Protection Platform and the CA is DigiCert, Entrust, or Microsoft.<br/>Example: `issuer_hint = "Microsoft"` | `none` |
    | `expiration_window` | [Integer](https://www.terraform.io/docs/extend/schemas/schema-types.html#typeint) | Number of hours before certificate expiry to request a new certificate            | 168    |
 
    >:pushpin: **NOTE**: The `venafi_certificate` resource handles certificate
